@@ -1,0 +1,24 @@
+imageboard 
+{
+    min-height: 500px;
+    padding: 0.75rem;
+
+    button 
+    {
+        font-size: 1rem;
+        background-color: $remove-button-color;
+        padding: 0 0.01rem;
+        @include mq(768px)
+        {
+            padding: 0 0.5rem;
+        }
+    }
+
+    .item
+    {
+        display: flex;
+        justify-self: flex-start;
+        align-items: center;
+        padding-top: 1rem;
+    }
+}
