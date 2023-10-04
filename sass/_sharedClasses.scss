@@ -14,7 +14,7 @@
     cursor: pointer;
 }
 
-.button :hover, .button:focus 
+.button :hover
 {
     filter: brightness(120%);
     color: $button-hover-color;

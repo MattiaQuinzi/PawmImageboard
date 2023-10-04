@@ -17,7 +17,20 @@ const initApp = () => {
         processInput();
     });
 
+    loadSavedItems();
     refresh();
+};
+
+const loadSavedItems = () => {
+    const localItems = localStorage.getItem("localItems");
+    if(typeof localItems !== "string") return;
+
+    const parsedItems = JSON.parse(localItems);
+    parsedItems.forEach(item => {
+        const newItem = createNewItem(item._id, item._url, item._tags);
+        imageboard.addItemToBoard(newItem);
+    });
+
 };
 
 const refresh = () => {
@@ -58,9 +71,17 @@ const buildBoardItem = (item) => {
     const label = document.createElement("label");
     label.htmlFor = item.getId();
     label.textContent = item.getTags();
+    label.id = item.getId();
 
+    const button = document.createElement("button");
+    button.id = item.getId();
+    button.value = "-";
+    button.className = "button";
+    addListenerToImgButton(button);
+    
     div.appendChild(img);
     div.appendChild(label);
+    div.appendChild(button);
 
     const board = document.getElementById("imageboard");
     board.appendChild(div);
@@ -83,6 +104,7 @@ const processInput = () => {
     const nextItemId = getNextItemId();
     const newItem = createNewItem(nextItemId, newUrl, newTags);
     imageboard.addItemToBoard(newItem);
+    updateSavedItems(imageboard.getBoard());
     refresh();
 };
 
@@ -112,4 +134,18 @@ const createNewItem = (id, url, tags) => {
     return item;
 };
 
-//1.27.30
+const updateSavedItems = (savedItems) => {
+    localStorage.setItem("localItems", JSON.stringify(savedItems));
+};
+
+const addListenerToImgButton = (button) => {
+    button.addEventListener("click", (event) => {
+        const confirmed = confirm("You are about to delete an image, proceed?");
+        
+        if(!confirmed) return;
+        
+        imageboard.removeItemFromBoard(button.id);
+        updateSavedItems();
+        refresh();
+    });
+};

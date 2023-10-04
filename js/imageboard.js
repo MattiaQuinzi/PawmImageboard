@@ -20,7 +20,7 @@ export default class ImageBoard
         this._board.push(item);
     }
 
-    removeItemToBoard(id)
+    removeItemFromBoard(id)
     {
         const board = this._board;
         for(let i=0; i<board.length;i++)
