@@ -32,7 +32,7 @@ export default class Item
         return this._tags;
     }
 
-    setTags()
+    setTags(tags)
     {
         this._tags = tags;
     }

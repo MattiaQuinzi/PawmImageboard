@@ -5,12 +5,12 @@ export default class ImageBoard
         this._board = [];
     }
 
-    getList()
+    getBoard()
     {
         return this._board;
     }
 
-    clearList()
+    clearBoard()
     {
         this._board = [];
     }
@@ -25,9 +25,9 @@ export default class ImageBoard
         const board = this._board;
         for(let i=0; i<board.length;i++)
         {
-            if(list[i]._id == id)
+            if(board[i]._id == id)
             {
-                list.splice(i, 1);
+                board.splice(i, 1);
                 break;
             }
         }

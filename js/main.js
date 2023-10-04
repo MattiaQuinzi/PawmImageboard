@@ -42,7 +42,7 @@ const deleteContents = (parentElement) => {
 
 const renderBoard = () => {
     const board = imageboard.getBoard();
-    FileList.forEach(item => {
+    board.forEach(item => {
         buildBoardItem(item);
     });
 };
@@ -67,8 +67,8 @@ const buildBoardItem = (item) => {
 };
 
 const clearTextbox = () => {
-    document.getElementById("urlinput").value = "";
-    document.getElementById("tagsinput").value = "";
+    document.getElementById("urlInput").value = "";
+    document.getElementById("tagsInput").value = "";
 };
 
 const processInput = () => {
@@ -77,14 +77,16 @@ const processInput = () => {
     if(!newUrl.length) return;
     const nextItemId = getNextItemId();
     const newItem = createNewItem(nextItemId, newUrl, newTags);
+    imageboard.addItemToBoard(newItem);
+    refresh();
 };
 
 const getNewUrl = () => {
-    return document.getElementById("urlinput").value.trim();
+    return document.getElementById("urlInput").value.trim();
 };
 
 const getNewTags = () => {
-    return document.getElementById("tagsinput").value.trim();
+    return document.getElementById("tagsInput").value.trim();
 };
 
 const getNextItemId = () => {
@@ -103,4 +105,6 @@ const createNewItem = (id, url, tags) => {
     item.setUrl(url);
     item.setTags(tags);
     return item;
-}
+};
+
+//1.27.30
