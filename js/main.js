@@ -64,6 +64,11 @@ const buildBoardItem = (item) => {
 
     const board = document.getElementById("imageboard");
     board.appendChild(div);
+    /*if(item.getId()%2==0)
+    {
+        const br = document.createElement("br");
+        board.appendChild(br);
+    }*/
 };
 
 const clearTextbox = () => {
